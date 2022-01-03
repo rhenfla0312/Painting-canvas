@@ -27,8 +27,8 @@ ctx.fillRect(0,0,CANVAS_SIZE,CANVAS_SIZE);
 ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
 
-ctx.lineWidth = 2.5;
 // context lineWidth 지정
+// ctx.lineWidth = 2.5;
 // 지정한 전체범위를 그린다, x,y,width,height를 지정한다
 // ctx.fillRect(50,20,100,49);
 
@@ -37,6 +37,7 @@ ctx.lineWidth = 2.5;
 // 조건문을 줄 변수 지정
 // filling - true이면 화면 전체가 체워진다, false면 painting 모드로 그려진다
 let filling = false;
+// painting - 마우스를 누르거나 땔 때 이벤트 지정
 let painting = false;
 
 
@@ -50,8 +51,9 @@ function startPainting() {
     painting = true;
 }
 
-
+// 사용자가 마우스를 움직일 때
 function onMouseMove(event) {
+    // 해당 범위의 좌표 가져오기
     const x = event.offsetX;
     const y = event.offsetY;
 
@@ -78,18 +80,18 @@ if(canvas) {
     canvas.addEventListener("mouseup", stopPainting);
     // 사용자가 해당 영역에서 마우스를 밖으로 옮길 때
     canvas.addEventListener("mouseleave", stopPainting);
-    
+    // 채우기
     canvas.addEventListener("click", handleCanvas);
     // 사용자가 마우스 우클릭을 했을 때
     canvas.addEventListener("contextmenu", handleCM);
 }
 
+// 마우스 우클릭 방지
 function handleCM(event) {
-    // 마우스 우클릭 -> 다운로드 방지
     event.preventDefault();
-    
 }
 
+// 채우기 지정 
 function handleCanvas() {
     if(filling) {
         ctx.fillRect(0,0,CANVAS_SIZE,CANVAS_SIZE);
@@ -97,7 +99,7 @@ function handleCanvas() {
 
     }
 }
-
+// 색상 지정
 function handleColor(event) {
     const color = event.target.style.backgroundColor;
     ctx.strokeStyle = color;
@@ -108,12 +110,17 @@ function handleColor(event) {
 Array.from(colors).forEach(color => color.addEventListener("click", handleColor))
 
 
+
+
+
+// bar event
 function handleRange(event) {
     const range = event.target.value;
     ctx.lineWidth = range;
 
 }
 
+// 채우기 이벤트
 function handleMode() {
     if(filling === true) {
         filling = false;
@@ -126,15 +133,17 @@ function handleMode() {
 
 // 저장 이벤트
 function handleSave() {
+    // canvas 다운기능
     const image = canvas.toDataURL();
     const link = document.createElement("a");
+    // 만든 a태그에 image url 연결
     link.href = image;
     // a 속성 -> download -> href처럼 링크로 가는게 아닌 다운로드를 한다
     link.download = "image";
     link.click();
 }
 
-// 
+// bar
 if(range) {
     range.addEventListener("input", handleRange);
 }
