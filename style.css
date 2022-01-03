@@ -1,0 +1,65 @@
+body {
+    background-color: #f6f9fc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0px;
+}
+
+.canvas {
+    width: 700px;
+    height: 700px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(50,50,93,0.11);
+}
+
+.controls {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls .controls__range {
+    margin-bottom: 30px;
+}
+
+.controls .controls__btns {
+    margin-bottom: 30px;
+}
+
+.controls__btns button {
+    all: unset;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 5px 0px;
+    width: 80px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(50,50,93,0.11);
+    border: 2px solid rgba(0,0,0,0.2);
+    color: rgba(0,0,0,0.8);
+    font-weight: bold;
+    font-size: 12px;
+    /* 대문자 & 소문자로 변경한다 */
+    text-transform: uppercase;
+}
+
+.controls__btns button:active {
+    /* 버튼 클릭 효과 */
+    transform: scale(0.98);
+}
+
+.controls .controls__colors {
+    display: flex;
+}
+
+.controls__colors .controls__color {
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 4px 6px rgba(50,50,93,0.11);
+    border-radius: 50%;
+    cursor: pointer;
+}
