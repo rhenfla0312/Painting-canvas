@@ -3,11 +3,39 @@
 // 마우스는 항상 움직인다, 변수로 지정한 painting이 true이냐 false이냐에 따라 이벤트가 달라진다
 
 
+// pc
 const canvas = document.getElementById("jsConvas"); // 전체영역
 const colors = document.getElementsByClassName("jsColor"); // 색상들
 const range = document.getElementById("jsRange"); // input range
 const mode = document.getElementById("jsMode"); // 채우기
 const save = document.getElementById("jsSave"); // 저장
+
+// mobile
+canvas.addEventListener("touchstart", handleStart,false);
+canvas.addEventListener("touchmove", handleMove,false);
+canvas.addEventListener("touchend", handleEnd, false);
+
+function handleStart(evt) {
+	// console.log(evt);
+	evt.preventDefault();
+	if(drawMode === 'fill'){
+		ctx.fillRect(0,0,500,500);
+	}else {
+		ctx.beginPath();
+		paintingTrue();	 
+	}
+}
+function handleMove(evt) {
+	evt.preventDefault();
+	var touches = evt.changedTouches;
+	ctx.lineTo(touches[0].screenX, touches[0].screenY);
+	ctx.stroke();
+}
+function handleEnd(evt) {
+	evt.preventDefault();
+	ctx.closePath();
+	paintingFalse();
+}
 
 // context - element에서 픽셀들을 컨트롤한다
 const ctx = canvas.getContext("2d"); // canvas context api
